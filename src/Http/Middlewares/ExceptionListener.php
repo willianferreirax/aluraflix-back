@@ -28,7 +28,7 @@ class ExceptionListener implements EventSubscriberInterface
             'status' => false,
             'message' => $exception->getMessage(),
         ]);
-        $response->setStatusCode($exception->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
+        $response->setStatusCode($exception->getCode() ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR);
         $event->setResponse($response);
     }
 
