@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\CategoryController;
 use App\Controllers\VideoController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
@@ -27,6 +28,36 @@ return function (RoutingConfigurator $routes) {
     $routes->add('delete_video', '/videos/{id}')
         ->controller([VideoController::class, 'destroy'])
         ->methods(['DELETE']) 
+    ;
+
+    $routes->add('get_categories', '/categories')
+        ->controller([CategoryController::class, 'index'])
+        ->methods(['GET'])
+    ;
+
+    $routes->add('get_category', '/categories/{id}')
+        ->controller([CategoryController::class, 'show'])
+        ->methods(['GET'])
+    ;
+
+    $routes->add('post_category', '/categories')
+        ->controller([CategoryController::class, 'store'])
+        ->methods(['POST'])
+    ;
+
+    $routes->add('put_category', '/categories/{id}')
+        ->controller([CategoryController::class, 'update'])
+        ->methods(['PUT'])
+    ;
+
+    $routes->add('delete_category', '/categories/{id}')
+        ->controller([CategoryController::class, 'destroy'])
+        ->methods(['DELETE'])
+    ;
+
+    $routes->add("get_videos_by_category", "/categories/{id}/videos")
+        ->controller([CategoryController::class, "getVideosByCategory"])
+        ->methods(["GET"])
     ;
 
 };
