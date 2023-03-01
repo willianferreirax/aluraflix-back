@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Http\Response\Response as JsonResponse;
+use App\Models\Category;
 use App\Models\Video;
 use Doctrine\ORM\EntityManagerInterface;
 use DomainException;
@@ -19,12 +20,19 @@ class VideoController extends AbstractController {
         $this->entityManager = $entityManager;
     }
 
-    public function index() : Response
+    public function index(Request $request) : Response
     {
+        $query = $request->get("search");
 
         $videoRepository = $this->entityManager->getRepository(Video::class);
 
-        $videos = $videoRepository->findAll();
+        if($query){
+            $videos = $videoRepository->findBy(["title" => $query]);
+        }
+        else{
+
+            $videos = $videoRepository->findAll();
+        }
 
         if(!$videos){
             throw new DomainException('No videos found', Response::HTTP_NOT_FOUND);
@@ -55,11 +63,26 @@ class VideoController extends AbstractController {
             throw new DomainException('Invalid request', Response::HTTP_BAD_REQUEST);
         }
 
+        $categoryRepository = $this->entityManager->getRepository(Category::class);
+
+        if(!empty($requestData['category_id'])){
+
+            $category = $categoryRepository->find($requestData['category_id']);
+        }
+        else{
+            $category = $categoryRepository->find(1);
+        }
+
+        if(!$category){
+            throw new DomainException('Category not found', Response::HTTP_NOT_FOUND);
+        }
+
         $video = new Video();
 
         $video->setTitle($requestData['title'] ?? '');
         $video->setUrl($requestData['url'] ?? '');
         $video->setDescription($requestData['description'] ?? '');
+        $video->setCategory($category);
         $video->setCreatedAt(new \DateTime());
 
         $this->entityManager->persist($video);

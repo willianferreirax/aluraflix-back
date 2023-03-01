@@ -22,6 +22,9 @@ class Video{
     #[ORM\Column(type: 'string')]
     private string $description;
 
+    #[ORM\OneToOne(targetEntity: Category::class)]
+    private Category $category;
+
     #[ORM\Column(type: 'datetime')]
     private \DateTime $created_at;
 
@@ -49,11 +52,17 @@ class Video{
      *
      * @return  self
      */ 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
 
-        if(!trim($title)){
+        $title = trim($title);
+
+        if(!$title){
             throw new \DomainException('Title is required');
+        }
+
+        if(is_numeric($title)){
+            throw new \DomainException('Title must be a string');
         }
 
         $this->title = $title;
@@ -74,7 +83,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
 
         if(!filter_var($url, FILTER_VALIDATE_URL)){
@@ -99,14 +108,42 @@ class Video{
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription($description = 1)
     {
 
-        if(!trim($description)){
+        $description = trim($description);
+
+        if(!$description){
             throw new \DomainException('Description is required');
         }
 
+        if(is_numeric($description)){
+            throw new \DomainException('Description must be a string');
+        }
+
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category
+     */ 
+    public function getCategory()
+    {
+        return $this->category->getId();
+    }
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */ 
+    public function setCategory(Category $category)
+    {
+
+        $category->addVideo($this);
+        $this->category = $category;
 
         return $this;
     }
