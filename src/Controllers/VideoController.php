@@ -44,7 +44,6 @@ class VideoController extends AbstractController{
         return new JsonResponse($videos);
     }
 
-    #[FreeToRequest]
     public function show(int $id) : Response
     {
         $videoRepository = $this->entityManager->getRepository(Video::class);
@@ -143,6 +142,21 @@ class VideoController extends AbstractController{
             data: ['message' => 'Video deleted successfully'],
             json: false
         );
+    }
+
+    #[FreeToRequest]
+    public function freeVideos() : Response
+    {
+
+        $videoRepository = $this->entityManager->getRepository(Video::class);
+
+        $videos = $videoRepository->findBy(["id" => [1, 2, 3]]);
+
+        if(!$videos){
+            throw new DomainException('There are no free videos available', Response::HTTP_NOT_FOUND);
+        }
+
+        return new JsonResponse($videos);
     }
 
 }
