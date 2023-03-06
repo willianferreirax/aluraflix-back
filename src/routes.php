@@ -12,6 +12,11 @@ return function (RoutingConfigurator $routes) {
         ->methods(['GET'])
     ;
 
+    $routes->add("free_videos", "/videos/free")
+        ->controller([VideoController::class,  'freeVideos'])
+        ->methods(["GET"])
+    ;
+
     $routes->add('get_video', '/videos/{id}')
         ->controller([VideoController::class, 'show'])
         ->methods(['GET'])
