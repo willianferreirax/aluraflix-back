@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Http\Contracts\MustAuthenticate;
 use App\Http\Response\Response as JsonResponse;
 use App\Models\Category;
 use App\Models\Video;
@@ -10,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+#[MustAuthenticate]
 class CategoryController extends AbstractController{
 
     private EntityManagerInterface $entityManager;

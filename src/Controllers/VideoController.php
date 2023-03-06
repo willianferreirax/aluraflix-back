@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Http\Contracts\FreeToRequest;
+use App\Http\Contracts\MustAuthenticate;
 use App\Http\Response\Response as JsonResponse;
 use App\Models\Category;
 use App\Models\Video;
@@ -11,7 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class VideoController extends AbstractController {
+#[MustAuthenticate]
+class VideoController extends AbstractController{
 
     private EntityManagerInterface $entityManager;
 
@@ -41,6 +44,7 @@ class VideoController extends AbstractController {
         return new JsonResponse($videos);
     }
 
+    #[FreeToRequest]
     public function show(int $id) : Response
     {
         $videoRepository = $this->entityManager->getRepository(Video::class);
