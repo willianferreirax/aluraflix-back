@@ -4,6 +4,7 @@ namespace App\Config;
 
 use App\Http\Middlewares\Authentication;
 use App\Http\Middlewares\ExceptionListener;
+use App\Http\Middlewares\ResponseListener;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager as ORMEntityManager;
@@ -145,7 +146,7 @@ return function(ContainerConfigurator $containerConfigurator) {
         ->args([service('matcher'), service('request_stack')])
     ;
 
-    $services->set('listener.response', EventListener\ResponseListener::class)
+    $services->set('listener.response', ResponseListener::class)
         ->args(['UTF-8'])
     ;
 
