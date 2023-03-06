@@ -4,11 +4,13 @@ namespace App\Config;
 
 use App\Http\Middlewares\Authentication;
 use App\Http\Middlewares\ExceptionListener;
+use App\Http\Middlewares\ResponseListener;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager as ORMEntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
+use Lcobucci\JWT\Configuration;
 use Psr\Container\ContainerInterface;
 use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
@@ -144,7 +146,7 @@ return function(ContainerConfigurator $containerConfigurator) {
         ->args([service('matcher'), service('request_stack')])
     ;
 
-    $services->set('listener.response', EventListener\ResponseListener::class)
+    $services->set('listener.response', ResponseListener::class)
         ->args(['UTF-8'])
     ;
 
@@ -158,6 +160,7 @@ return function(ContainerConfigurator $containerConfigurator) {
         ->call('addSubscriber', [service('listener.router')])
         ->call('addSubscriber', [service('listener.response')])
         ->call('addSubscriber', [service('listener.exception')])
+        ->call('addSubscriber', [service('listener.auth')])
     ;
 
     $services->set(HttpKernelInterface::class, HttpKernel::class)
@@ -166,6 +169,11 @@ return function(ContainerConfigurator $containerConfigurator) {
         ->arg('$requestStack', service('request_stack'))
         ->arg('$argumentResolver', service(ArgumentResolverInterface::class))
         ->public()
+    ;
+
+    $services->set(Configuration::class)
+        ->factory([JWTConfig::class, 'getConfig'])
+        ->arg('$key', $_ENV['JWT_SECRET'])
     ;
 
 };
