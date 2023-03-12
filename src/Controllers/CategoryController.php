@@ -61,6 +61,7 @@ class CategoryController extends AbstractController{
         $category = new Category();
         $category->setTitle($requestData['title']);
         $category->setColor($requestData['color']);
+        $category->setCreatedAt(new \DateTime());
 
         $this->entityManager->persist($category);
         $this->entityManager->flush();
@@ -94,6 +95,7 @@ class CategoryController extends AbstractController{
 
         $category->setTitle($requestData['title']);
         $category->setColor($requestData['color']);
+        $category->setUpdatedAt(new \DateTime());
 
         $this->entityManager->flush();
 
