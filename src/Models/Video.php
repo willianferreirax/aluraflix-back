@@ -88,7 +88,7 @@ class Video{
     {
 
         if(!filter_var($url, FILTER_VALIDATE_URL)){
-            throw new \DomainException('Invalid URL');
+            throw new \DomainException('Invalid URL, make sure to include http:// or https://');
         }
 
         $this->url = $url;
