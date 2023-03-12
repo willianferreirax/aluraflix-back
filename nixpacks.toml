@@ -8,3 +8,4 @@ cmds = ["..."]
 
 [phases.migrate]
 cmds = ["php vendor/bin/phinx migrate -e production"]
+dependsOn = ["start"]
