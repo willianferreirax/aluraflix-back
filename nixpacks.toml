@@ -4,7 +4,7 @@ providers = ["..."]
 nixPkgs = ['...']
 
 [phases.build]
-cmds = ["...", "php vendor/bin/phinx migrate -e production"]
+cmds = ["..."]
 
 [start]
-cmd = 'perl /assets/prestart.pl /app/nginx.template.conf /nginx.conf && (php-fpm -y /assets/php-fpm.conf & nginx -c /nginx.conf)'
+cmds = ["...", "php vendor/bin/phinx migrate -e production"]
