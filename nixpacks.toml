@@ -6,6 +6,5 @@ nixPkgs = ['...']
 [phases.build]
 cmds = ["..."]
 
-[phases.migrate]
-cmds = ["php vendor/bin/phinx migrate -e production"]
-dependsOn = ["build"]
+[app]
+postBuild = "php vendor/bin/phinx migrate -e production"
