@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Repositories\VideoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: VideoRepository::class)]
 #[ORM\Table(name: 'videos')]
 class Video{
 

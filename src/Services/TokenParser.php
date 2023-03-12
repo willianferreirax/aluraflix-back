@@ -16,7 +16,7 @@ class TokenParser{
         $token = $this->config->parser()->parse($jwt);
 
         if (!$this->config->validator()->validate($token, ...$this->config->validationConstraints())) {
-            throw new \InvalidArgumentException('Invalid token provided');
+            throw new \InvalidArgumentException('Invalid token provided', 401);
         }
 
         return $token;

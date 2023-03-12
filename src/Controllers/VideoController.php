@@ -25,17 +25,12 @@ class VideoController extends AbstractController{
 
     public function index(Request $request) : Response
     {
-        $query = $request->get("search");
+        $title = $request->get("search");
+        $page = $request->get("page", 1);
 
         $videoRepository = $this->entityManager->getRepository(Video::class);
 
-        if($query){
-            $videos = $videoRepository->findBy(["title" => $query]);
-        }
-        else{
-
-            $videos = $videoRepository->findAll();
-        }
+        $videos = $videoRepository->findByTitlePaginated($title, $page);
 
         if(!$videos){
             throw new DomainException('No videos found', Response::HTTP_NOT_FOUND);

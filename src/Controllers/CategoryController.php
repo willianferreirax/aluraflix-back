@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Http\Contracts\FreeToRequest;
 use App\Http\Contracts\MustAuthenticate;
 use App\Http\Response\Response as JsonResponse;
 use App\Models\Category;
@@ -20,12 +21,14 @@ class CategoryController extends AbstractController{
     {
         $this->entityManager = $manager;
     }
+    
+    public function index(Request $request) {
 
-    public function index() {
-
+        $page = $request->get("page", 1);
+        
         $categoryRepository = $this->entityManager->getRepository(Category::class);
 
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findAllPaginated($page);
 
         if(!$categories){
             throw new \DomainException('No categories found', Response::HTTP_NOT_FOUND);
@@ -115,7 +118,9 @@ class CategoryController extends AbstractController{
         );
     }
 
-    public function getVideosByCategory(int $id) {
+    public function getVideosByCategory(Request $request, int $id) {
+
+        $page = $request->get("page", 1);
 
         $categoryRepository = $this->entityManager->getRepository(Category::class);
 
@@ -127,10 +132,10 @@ class CategoryController extends AbstractController{
 
         $videoRepository = $this->entityManager->getRepository(Video::class);
 
-        $videos = $videoRepository->findBy(["category" => $category]);
+        $videos = $videoRepository->findByCategoryPaginated($category, $page);
 
         if(!$videos){
-            throw new \DomainException('No videos found for this category', Response::HTTP_NOT_FOUND);
+            throw new \DomainException('No videos found', Response::HTTP_NOT_FOUND);
         }
 
         return new JsonResponse($videos);

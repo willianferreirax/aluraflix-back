@@ -40,7 +40,7 @@ return function(ContainerConfigurator $containerConfigurator) {
     ;
     
     $services->load('App\\', '../{Controllers,Models,Services}/*')
-        ->exclude('../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}')
+        // ->exclude('../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}')
         ->public()
     ;
 
@@ -50,7 +50,7 @@ return function(ContainerConfigurator $containerConfigurator) {
     $services->set(ORMSetup::class)
         ->factory([ORMSetup::class, 'createAttributeMetadataConfiguration'])
         ->arg('$paths', array(__DIR__."/../src"))
-        ->arg('$isDevMode', true)
+        ->arg('$isDevMode', $_ENV["DEV_MODE"])
     ;
 
     $services->set(DriverManager::class)
