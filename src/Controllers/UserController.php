@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Http\Contracts\MustAuthenticate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +11,7 @@ use App\Http\Response\Response;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\JsonResponse as HttpFoundationJsonResponse;
 
+#[MustAuthenticate]
 class UserController extends AbstractController{
 
     public function __construct(
@@ -35,6 +37,7 @@ class UserController extends AbstractController{
         $user->setName($requestData['name'] ?? '');
         $user->setLogin($requestData['login'] ?? '');
         $user->setPass($requestData['pass'] ?? '');
+        $user->setCreatedAt(new \DateTime());
 
         $this->manager->persist($user);
         $this->manager->flush();
