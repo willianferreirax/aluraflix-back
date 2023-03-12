@@ -5,7 +5,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader as ContainerPhpFileLoader;
 use Symfony\Component\Config\FileLocator;
 
-Environment::loadEnv(__DIR__ . '/../../.env');
+if (getenv('DEV_MODE') === false) { // se ela não existir, ou seja, se for false
+
+    Environment::loadEnv(__DIR__ . '/../../.env');
+}
 
 $containerBuilder = new ContainerBuilder();
 $loader = new ContainerPhpFileLoader($containerBuilder, new FileLocator(__DIR__));
