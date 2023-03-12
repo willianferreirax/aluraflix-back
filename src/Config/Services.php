@@ -61,6 +61,7 @@ return function(ContainerConfigurator $containerConfigurator) {
             'user' => $_ENV['DB_USER'],
             'password' => $_ENV['DB_PASS'],
             'host' => $_ENV['DB_HOST'],
+            'port' => $_ENV['DB_PORT'],
         ])
         ->arg('$config', service(ORMSetup::class))
     ;
