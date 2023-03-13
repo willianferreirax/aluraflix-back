@@ -154,4 +154,9 @@ class VideoController extends AbstractController{
         return new JsonResponse($videos);
     }
 
+    #[FreeToRequest]
+    public function info(){
+        phpinfo();
+    }
+
 }

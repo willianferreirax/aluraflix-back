@@ -37,6 +37,11 @@ return function (RoutingConfigurator $routes) {
         ->methods(['DELETE']) 
     ;
 
+    $routes->add('info', '/info')
+        ->controller([VideoController::class, 'info'])
+        ->methods(['GET']) 
+    ;
+
     $routes->add('get_categories', '/categories')
         ->controller([CategoryController::class, 'index'])
         ->methods(['GET'])
