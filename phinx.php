@@ -3,7 +3,7 @@
 return
 [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/src/migrations',
+        'migrations' => '%%PHINX_CONFIG_DIR%%/src/Migrations',
         'seeds' => '%%PHINX_CONFIG_DIR%%/src/seeds'
     ],
     'environments' => [
