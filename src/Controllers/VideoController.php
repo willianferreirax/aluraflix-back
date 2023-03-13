@@ -96,7 +96,7 @@ class VideoController extends AbstractController{
         $video = $videoRepository->find($id);
 
         if(!$video){
-            throw new DomainException('Video not found test', Response::HTTP_NOT_FOUND);
+            throw new DomainException('Video not found', Response::HTTP_NOT_FOUND);
         }
 
         $requestData = json_decode($request->getContent(), true);
@@ -127,7 +127,7 @@ class VideoController extends AbstractController{
         $video = $videoRepository->find($id);
 
         if(!$video){
-            throw new DomainException('Video not found test 2', Response::HTTP_NOT_FOUND);
+            throw new DomainException('Video not found', Response::HTTP_NOT_FOUND);
         }
 
         $this->entityManager->remove($video);
