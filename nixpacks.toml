@@ -1,9 +1,0 @@
-[phases.setup]
-nixPkgs = ['...']
-
-[phases.build]
-cmds = ["..."]
-
-[app]
-providers = ["..."]
-postBuild = "php vendor/bin/phinx migrate -e production test"

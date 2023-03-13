@@ -1,1 +1,1 @@
-release: ls src/Migrations && php vendor/bin/phinx migrate -e production
+release: php vendor/bin/phinx migrate -e production

@@ -4,7 +4,7 @@ return
 [
     'paths' => [
         'migrations' => '%%PHINX_CONFIG_DIR%%/src/Migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/src/seeds'
+        'seeds' => '%%PHINX_CONFIG_DIR%%/src/Seeds'
     ],
     'environments' => [
         'default_migration_table' => 'phinxlog',
