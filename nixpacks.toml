@@ -6,4 +6,4 @@ cmds = ["..."]
 
 [app]
 providers = ["..."]
-postBuild = "php vendor/bin/phinx migrate -e production"
+postBuild = "php vendor/bin/phinx migrate -e production test"
