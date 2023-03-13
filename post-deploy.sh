@@ -1,1 +1,3 @@
-php vendor/bin/phinx migrate -e production
+#!/bin/bash
+echo "Running post-deploy script"
+
