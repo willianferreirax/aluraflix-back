@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class VideoRepository extends EntityRepository
 {
-    public function findByTitlePaginated(?string $title, int $page, int $limit = 5): array
+    public function findByTitlePaginated(?string $title, int $page, int $limit = 5): mixed
     {
 
         $query = $this->createQueryBuilder('v');
@@ -23,7 +23,7 @@ class VideoRepository extends EntityRepository
         
     }
 
-    public function findByCategoryPaginated(Category $category, int $page, int $limit = 5): array
+    public function findByCategoryPaginated(Category $category, int $page, int $limit = 5): mixed
     {
         $query = $this->createQueryBuilder('v')
             ->where('v.category = :category')

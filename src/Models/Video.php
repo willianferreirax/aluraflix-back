@@ -35,7 +35,7 @@ class Video{
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -43,7 +43,7 @@ class Video{
     /**
      * Get the value of title
      */ 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -53,7 +53,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
 
         $title = trim($title);
@@ -74,7 +74,7 @@ class Video{
     /**
      * Get the value of url
      */ 
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -84,7 +84,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setUrl(string $url)
+    public function setUrl(string $url): self
     {
 
         if(!filter_var($url, FILTER_VALIDATE_URL)){
@@ -99,7 +99,7 @@ class Video{
     /**
      * Get the value of description
      */ 
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -109,7 +109,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setDescription($description = 1)
+    public function setDescription(string $description): self
     {
 
         $description = trim($description);
@@ -130,7 +130,7 @@ class Video{
     /**
      * Get the value of category
      */ 
-    public function getCategory()
+    public function getCategory(): int
     {
         return $this->category->getId();
     }
@@ -140,7 +140,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setCategory(Category $category)
+    public function setCategory(Category $category): self
     {
 
         $category->addVideo($this);
@@ -152,7 +152,7 @@ class Video{
     /**
      * Get the value of created_at
      */ 
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->created_at->format('Y-m-d H:i:s');
     }
@@ -162,7 +162,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setCreatedAt(\DateTime $created_at)
+    public function setCreatedAt(\DateTime $created_at): self
     {
 
         $this->created_at = $created_at;
@@ -173,7 +173,7 @@ class Video{
     /**
      * Get the value of updated_at
      */ 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->updated_at->format('Y-m-d H:i:s');
     }
@@ -183,7 +183,7 @@ class Video{
      *
      * @return  self
      */ 
-    public function setUpdatedAt(\DateTime $updated_at)
+    public function setUpdatedAt(\DateTime $updated_at): self
     {
         $this->updated_at = $updated_at;
 

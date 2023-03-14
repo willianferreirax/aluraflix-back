@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Http\Contracts\FreeToRequest;
 use App\Http\Contracts\MustAuthenticate;
 use App\Http\Response\Response as JsonResponse;
 use App\Models\Category;
@@ -15,14 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 #[MustAuthenticate]
 class CategoryController extends AbstractController{
 
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $manager)
-    {
-        $this->entityManager = $manager;
-    }
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ){}
     
-    public function index(Request $request) {
+    public function index(Request $request): Response {
 
         $page = $request->get("page", 1);
         
@@ -37,7 +33,7 @@ class CategoryController extends AbstractController{
         return new JsonResponse($categories);
     }
 
-    public function show(int $id) {
+    public function show(int $id): Response {
 
         $categoryRepository = $this->entityManager->getRepository(Category::class);
 
@@ -50,7 +46,7 @@ class CategoryController extends AbstractController{
         return new JsonResponse($category);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request): Response {
 
         $requestData = json_decode($request->getContent(), true);
 
@@ -70,7 +66,7 @@ class CategoryController extends AbstractController{
 
     }
 
-    public function update(Request $request, int $id) {
+    public function update(Request $request, int $id): Response {
         $categoryRepository = $this->entityManager->getRepository(Category::class);
 
         $category = $categoryRepository->find($id);
@@ -102,7 +98,7 @@ class CategoryController extends AbstractController{
         return new JsonResponse($category);
     }
 
-    public function destroy(int $id) {
+    public function destroy(int $id): Response {
         $categoryRepository = $this->entityManager->getRepository(Category::class);
 
         $category = $categoryRepository->find($id);
@@ -120,7 +116,7 @@ class CategoryController extends AbstractController{
         );
     }
 
-    public function getVideosByCategory(Request $request, int $id) {
+    public function getVideosByCategory(Request $request, int $id): Response {
 
         $page = $request->get("page", 1);
 

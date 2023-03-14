@@ -6,7 +6,6 @@ use App\Http\Contracts\MustAuthenticate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use App\Http\Response\Response as JsonResponse;
 use App\Http\Response\Response;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\JsonResponse as HttpFoundationJsonResponse;

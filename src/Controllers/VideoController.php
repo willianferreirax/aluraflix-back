@@ -16,12 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 #[MustAuthenticate]
 class VideoController extends AbstractController{
 
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ){}
 
     public function index(Request $request) : Response
     {

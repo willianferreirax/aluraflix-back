@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class CategoryRepository extends EntityRepository{
     
-    public function findAllPaginated(int $page, int $limit = 5): array
+    public function findAllPaginated(int $page, int $limit = 5): mixed
     {
         $query = $this->createQueryBuilder('c');
 

@@ -44,7 +44,7 @@ class Category{
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Category{
     /**
      * Get the value of title
      */ 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -63,7 +63,7 @@ class Category{
      *
      * @return  self
      */ 
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
 
         $title = trim($title);
@@ -84,7 +84,7 @@ class Category{
     /**
      * Get the value of color
      */ 
-    public function getColor()
+    public function getColor(): string
     {
         return $this->color;
     }
@@ -94,7 +94,7 @@ class Category{
      *
      * @return  self
      */ 
-    public function setColor(string $color)
+    public function setColor(string $color): self
     {
 
         $color = trim($color);
@@ -115,7 +115,7 @@ class Category{
     /**
      * Get the value of created_at
      */ 
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->created_at->format('Y-m-d H:i:s');
     }
@@ -125,7 +125,7 @@ class Category{
      *
      * @return  self
      */ 
-    public function setCreatedAt(\Datetime $created_at)
+    public function setCreatedAt(\Datetime $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -135,7 +135,7 @@ class Category{
     /**
      * Get the value of updated_at
      */ 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->updated_at->format('Y-m-d H:i:s');
     }
@@ -145,7 +145,7 @@ class Category{
      *
      * @return  self
      */ 
-    public function setUpdatedAt(\Datetime $updated_at)
+    public function setUpdatedAt(\Datetime $updated_at): self
     {
         $this->updated_at = $updated_at;
 

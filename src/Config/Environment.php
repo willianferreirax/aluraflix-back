@@ -3,7 +3,7 @@
 namespace App\Config;
 
 class Environment {
-  public static function loadEnv($path) {
+  public static function loadEnv(string $path) {
     if (!file_exists($path)) {
       throw new \Exception('.env file not found');
     }
